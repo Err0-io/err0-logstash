@@ -16,33 +16,22 @@ public class Err0PluginTest {
 
     @Test
     public void testJavaOutputExample() {
-        String prefix = "Prefix";
         Map<String, Object> configValues = new HashMap<>();
-        configValues.put(Err0Plugin.PREFIX_CONFIG.name(), prefix);
+        configValues.put(Err0Plugin.URL.name(), "https://open-source-dev.err0.io:8443/");
+        configValues.put(Err0Plugin.TOKEN.name(), "2.pHkDUXHbM-S-OkuePiq8NVdDN6ANtwwVPt1nzg5RkZw_oIcvWPyll61ulTtk5cdq-cqVtA3IKwjK7cAAYhDs0IosqkEoOjgMU7P4c5QdjwnusoPZqeND0w.SQ8R3sHTFQ5RJkrM-9bwTLRBkK1zNmeXhbj7W9KEcps");
+
         Configuration config = new ConfigurationImpl(configValues);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Err0Plugin output = new Err0Plugin("test-id", config, null, baos);
+        Err0Plugin output = new Err0Plugin("test-id", config, null);
 
         String sourceField = "message";
         int eventCount = 5;
         Collection<Event> events = new ArrayList<>();
         for (int k = 0; k < eventCount; k++) {
             Event e = new org.logstash.Event();
-            e.setField(sourceField, "message " + k);
+            e.setField(sourceField, "[EG-" + k + "] example log line");
             events.add(e);
         }
 
         output.output(events);
-
-        String outputString = baos.toString();
-        int index = 0;
-        int lastIndex = 0;
-        while (index < eventCount) {
-            lastIndex = outputString.indexOf(prefix, lastIndex);
-            Assert.assertTrue("Prefix should exist in output string", lastIndex > -1);
-            lastIndex = outputString.indexOf("message " + index);
-            Assert.assertTrue("Message should exist in output string", lastIndex > -1);
-            index++;
-        }
     }
 }

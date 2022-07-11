@@ -48,6 +48,8 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.9.1'
     //implementation fileTree(dir: LOGSTASH_CORE_PATH, include: "**/logstash-core*.jar")
     implementation files(LOGSTASH_CORE_PATH + '/build/libs/logstash-core.jar')
+    implementation "org.apache.httpcomponents.client5:httpclient5:5.1"
+    implementation "com.google.code.gson:gson:2.8.7"
 
     testImplementation 'junit:junit:4.12'
     // https://mvnrepository.com/artifact/org.jruby/jruby-complete
