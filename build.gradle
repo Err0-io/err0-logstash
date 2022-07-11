@@ -16,7 +16,7 @@ pluginInfo.authors         = ['err0.io']
 pluginInfo.email           = ['info@err0.io']
 pluginInfo.homepage        = "https://www.err0.io"
 pluginInfo.pluginType      = "output"
-pluginInfo.pluginClass     = "Err0Plugin"
+pluginInfo.pluginClass     = "Err0Output"
 pluginInfo.pluginName      = "err0_output" // must match the @LogstashPlugin annotation in the main plugin class
 // ===========================================================================
 

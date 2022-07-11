@@ -9,7 +9,6 @@ import co.elastic.logstash.api.PluginConfigSpec;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,7 +20,7 @@ import java.util.regex.Pattern;
 
 // class name must match plugin name
 @LogstashPlugin(name = "err0_output")
-public class Err0Plugin implements Output {
+public class Err0Output implements Output {
 
     public static class Err0Log {
         public Err0Log(final String error_code, final long ts, final String message, final JsonObject metadata) {
@@ -45,7 +44,7 @@ public class Err0Plugin implements Output {
     private volatile boolean stopped = false;
 
     // all plugins must provide a constructor that accepts id, Configuration, and Context
-    public Err0Plugin(final String id, final Configuration configuration, final Context context) {
+    public Err0Output(final String id, final Configuration configuration, final Context context) {
         // constructors should validate configuration options
         this.id = id;
         String url = configuration.get(URL);
