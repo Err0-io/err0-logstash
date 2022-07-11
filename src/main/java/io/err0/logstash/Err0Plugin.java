@@ -1,4 +1,4 @@
-package org.logstashplugins;
+package io.err0.logstash;
 
 import co.elastic.logstash.api.Configuration;
 import co.elastic.logstash.api.Context;
@@ -15,8 +15,8 @@ import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
 // class name must match plugin name
-@LogstashPlugin(name = "java_output_example")
-public class JavaOutputExample implements Output {
+@LogstashPlugin(name = "err0_output")
+public class Err0Plugin implements Output {
 
     public static final PluginConfigSpec<String> PREFIX_CONFIG =
             PluginConfigSpec.stringSetting("prefix", "");
@@ -28,11 +28,11 @@ public class JavaOutputExample implements Output {
     private volatile boolean stopped = false;
 
     // all plugins must provide a constructor that accepts id, Configuration, and Context
-    public JavaOutputExample(final String id, final Configuration configuration, final Context context) {
+    public Err0Plugin(final String id, final Configuration configuration, final Context context) {
         this(id, configuration, context, System.out);
     }
 
-    JavaOutputExample(final String id, final Configuration config, final Context context, OutputStream targetStream) {
+    Err0Plugin(final String id, final Configuration config, final Context context, OutputStream targetStream) {
         // constructors should validate configuration options
         this.id = id;
         prefix = config.get(PREFIX_CONFIG);

@@ -1,11 +1,10 @@
-package org.logstashplugins;
+package io.err0.logstash;
 
 import co.elastic.logstash.api.Configuration;
 import co.elastic.logstash.api.Event;
 import org.junit.Assert;
 import org.junit.Test;
 import org.logstash.plugins.ConfigurationImpl;
-import org.logstashplugins.JavaOutputExample;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -13,16 +12,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JavaOutputExampleTest {
+public class Err0PluginTest {
 
     @Test
     public void testJavaOutputExample() {
         String prefix = "Prefix";
         Map<String, Object> configValues = new HashMap<>();
-        configValues.put(JavaOutputExample.PREFIX_CONFIG.name(), prefix);
+        configValues.put(Err0Plugin.PREFIX_CONFIG.name(), prefix);
         Configuration config = new ConfigurationImpl(configValues);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        JavaOutputExample output = new JavaOutputExample("test-id", config, null, baos);
+        Err0Plugin output = new Err0Plugin("test-id", config, null, baos);
 
         String sourceField = "message";
         int eventCount = 5;
