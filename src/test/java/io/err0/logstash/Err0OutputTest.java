@@ -15,8 +15,9 @@ public class Err0OutputTest {
     @Test
     public void testJavaOutputExample() {
         Map<String, Object> configValues = new HashMap<>();
-        configValues.put(Err0Output.URL.name(), "https://open-source.dev.err0.io:8443/");
-        configValues.put(Err0Output.TOKEN.name(), "2.MFRF-aOr9f8BS9oMHGatWXfIYGY_m5IPWpMQPccLxXZqSSGGx8JJgsJOfYwLtelzgZu63kZIpZGpnQW5sw_wAQbGQvHQxAHz421yrEZuk0zywZm_Gt4kVw.SVFJddGR3KTR_nAA_bYivKrIfh0GbvsXLxY0x2qOlug");
+        // the token/url is in the starter database, in the junit tests (with UAT data).
+        configValues.put(Err0Output.URL.name(), "https://open-source.uat.err0.io:8443/");
+        configValues.put(Err0Output.TOKEN.name(), "2.PXQvjFDr1iAjpHWnC1Vb-mCMvovZVV85KfRxfMssJPUPYwWoMt9afyGDZMoeLd0qLI85Z_YTaNWo60nBE2k6x_TaLMIRBMtAfqjZEt18yiF2POjIPbpWVg.nWfWYUw3TDeadEOiE3hG5WCM2VKSk6fMJ8xa5AEiwrI");
 
         Configuration config = new ConfigurationImpl(configValues);
         Err0Output output = new Err0Output("test-id", config, null);
