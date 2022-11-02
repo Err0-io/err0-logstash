@@ -137,7 +137,7 @@ public class Err0Output implements Output {
             Event event = z.next();
             String formattedMessage = event.toString();
             final Matcher matcher = pattern.matcher(formattedMessage);
-            if (matcher.find()) {
+            while (matcher.find()) {
                 final String error_code = matcher.group(1);
                 final long ts = event.getEventTimestamp().toEpochMilli();
                 final JsonObject metadata = new JsonObject();
