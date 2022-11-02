@@ -4,5 +4,4 @@
 /build
 /lib
 /vendor
-/Gemfile
 /*.gem
