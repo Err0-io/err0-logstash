@@ -23,16 +23,12 @@ import java.util.regex.Pattern;
 public class Err0Output implements Output {
 
     public static class Err0Log {
-        public Err0Log(final String error_code, final long ts, final String message, final JsonObject metadata) {
+        public Err0Log(final String error_code, final long ts) {
             this.error_code = error_code;
             this.ts = ts;
-            this.message = message;
-            this.metadata = metadata;
         }
         public final String error_code;
         public final long ts;
-        public final String message;
-        public final JsonObject metadata;
     }
 
     public static final PluginConfigSpec<String> URL = PluginConfigSpec.stringSetting("url", "");
@@ -95,8 +91,6 @@ public class Err0Output implements Output {
                     JsonObject o = new JsonObject();
                     o.addProperty("error_code", log.error_code);
                     o.addProperty("ts", Long.toString(log.ts));
-                    o.addProperty("msg", log.message);
-                    o.add("metadata", log.metadata);
 
                     logs.add(o);
                 }
@@ -140,32 +134,7 @@ public class Err0Output implements Output {
             while (matcher.find()) {
                 final String error_code = matcher.group(1);
                 final long ts = event.getEventTimestamp().toEpochMilli();
-                final JsonObject metadata = new JsonObject();
-                final JsonObject logstashData = new JsonObject();
-                final JsonObject logstashMetadata = new JsonObject();
-                final Map<String, Object> eventData = event.getData();
-                if (null != eventData) {
-                    for (Map.Entry<String, Object> entry : eventData.entrySet()) {
-                        logstashData.addProperty(entry.getKey(), entry.getValue().toString());
-                    }
-                }
-                final Map<String, Object> eventMetadata = event.getMetadata();
-                if (null != eventMetadata) {
-                    for (Map.Entry<String, Object> entry : eventMetadata.entrySet()) {
-                        logstashMetadata.addProperty(entry.getKey(), entry.getValue().toString());
-                    }
-                }
-                final JsonObject logstash = new JsonObject();
-                if (!logstashData.entrySet().isEmpty()) {
-                    logstash.add("data", logstashData);
-                }
-                if (!logstashMetadata.entrySet().isEmpty()) {
-                    logstash.add("metadata", logstashMetadata);
-                }
-                if (!logstash.entrySet().isEmpty()) {
-                    metadata.add("logstash", logstash);
-                }
-                queue.add(new Err0Log(error_code, ts, formattedMessage, metadata));
+                queue.add(new Err0Log(error_code, ts));
             }
         }
     }
